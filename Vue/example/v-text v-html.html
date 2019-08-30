@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-text & v-html</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>v-text & v-html</h1>
+    <div id="app">
+      <span>{{message}}</span>=<span v-text="message"></span>
+      <hr>
+      <span>{{dodo}}</span><span v-html="dodo"></span>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:'hello world',
+                dodo:'<h2>hello world</h2>'
+            }
+        })
+    </script>
+</body>
+</html>
+<!-- 
+    {{message}}在标签内写 容易出现在网络不好时直接出现{{message}}，等加载之后才会出现加载的内容
+    v-text 在网络不好时不出现 只有等完全加载出来后才显示
+    双大括号会将数据解释为纯文本，而非HTML。为了输出真正的HTML，你就需要使用v-html 指令。
+ -->

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>v-bind</h1>
+    <div id="app">
+       <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567085687081&di=dda915552aed71e41eee94359d2dd510&imgtype=0&src=http%3A%2F%2Fpic33.nipic.com%2F20131007%2F13639685_123501617185_2.jpg" width="200px" alt="">
+       <img v-bind:src="imgsrc" width="200px" alt=""><br>
+        <a href="https://jspang.com/posts/2017/02/23/vue2-1.html#%E7%AC%AC3%E8%8A%82%EF%BC%9Av-for%E6%8C%87%E4%BB%A4-%EF%BC%9A%E8%A7%A3%E5%86%B3%E6%A8%A1%E6%9D%BF%E5%BE%AA%E7%8E%AF%E9%97%AE%E9%A2%98" target="_blank">技术胖视频</a> <!-- target="_blank" 在新窗口打开 -->
+        <a :href="aHref" target="_blank" >在别的窗口打开</a><hr>
+        <div>
+            <h3>1.绑定class</h3>
+                <p :class="classNameA">我是classA</p>
+                <p :class="classNameB">我是classB</p>
+            <h3>2.绑定class中的判断</h3>
+                <p :class="{classA:isOK}">我是OK</p>
+                <P :class="{classA:isNO}">我是NO</P>
+            <h3>3.数组形式绑定</h3>
+                <p :class="[classNameA,classNameB]">我是classA和classB</p>
+            <h3>4.动态数据绑定</h3>
+                <div>
+                    <input type="checkbox" id="isOK" v-model="isOK">
+                    <label for="isOK">isOK = {{isOK}}</label>
+                </div>
+               
+            <h3>5.三元运算符判断</h3>
+                <div>
+                    <p :class="isOK?classNameA:classNameB">我是三元运算符判断的数据绑定</p>
+                    <input type="checkbox" id="isOK" v-model="isOK">
+                    <label for="isOK"></label>isOK = {{isOK?classNameA:classNameB}}</label>
+                </div>
+            <h3>6.绑定style值</h3>
+                <div :style="{color:blue,fontSize:size}">我是绑定的style值</div>
+            <h3>7.声明对象进行绑定style的值</h3>
+                <div :style="someStyle">我是声明对象而绑定的</div>
+        </div>
+    </div>
+    <style>
+        .classA{
+            color:red;
+        }
+        .classB{
+            font-size:150%;
+        }
+    </style>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                imgsrc:'http://pic49.nipic.com/file/20140919/8002939_140942016000_2.jpg',
+                aHref:'https://nodejs.org/en/',
+                classNameA:'classA',
+                classNameB:'classB',
+                isOK:true,
+                isNO:false,
+                blue:'blue',
+                size:'200%',
+                someStyle:{
+                    color:'green',
+                    fontSize:'300%',
+                    backgroundColor:'#eee'
+                }
+
+                
+            }
+        })
+    </script>
+</body>
+</html>
+<!--  -->

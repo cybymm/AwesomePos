@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>other</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>other</h1>
+    <div id="app">
+       <div v-pre>{{message}}</div><!-- 原样输出 -->
+       <div v-cloak>渲染完成后才显示</div>
+       <hr>
+       <div v-once>{{message}}</div><!-- 只进行一次渲染 -->
+       <div><input type="text" v-model="message"></div>
+       <div>{{message}}</div>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"hello world!!"
+            }
+        })
+    </script>
+</body>
+</html>

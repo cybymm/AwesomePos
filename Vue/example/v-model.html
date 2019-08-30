@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-model</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>v-model 双向数据绑定</h1>
+    <div id="app">
+        <p> 原始文本信息  ：{{message}}去空格</p><br>
+        <h3>文本框</h3>
+        <p><input type="text" v-model="message"></p>
+        <p> <input type="text" v-model.lazy="message"></p>  <!--v-model.lazy 懒加载 只有在鼠标移开文本框的时候原始文本信息才能发生变化  -->
+        <p> <input type="text" v-model.number="message"></p>  <!--v-model.number 必须是数字才能进行数据得双向绑定  若输入的文本是字符串 则不能实现 -->
+        <p><input type="text" v-model.trim="message"></p><!--去空格-->
+        <hr>
+        <h3>文本域</h3>
+        <textarea cols="30" rows="10" v-model="message"></textarea>
+        <hr>
+        <h3>多选框绑定一个值</h3>
+        <input type="checkbox" id="istrue" v-model="isTrue">
+        <label for="isTrue">{{isTrue}}</label>
+        <h3>多选框绑定数组</h3>
+        <input type="checkbox" id="istrue" v-model="isTrue">
+        <label for="istrue">{{isTrue}}</label>
+        <hr>
+        <input type="checkbox"  id="ymm" value="ymm" v-model="webnames">
+        <label for="">ymm</label>
+        <input type="checkbox"  id="dyy" value="dyy" v-model="webnames">
+        <label for="">dyy</label>
+        <input type="checkbox"  id="hyy" value="hyy" v-model="webnames">
+        <label for="">hyy</label>
+        <input type="checkbox"  id="wmm" value="wmm" v-model="webnames">
+        <label for="">wmm</label>
+        <p>{{webnames}}</p>
+        <hr>
+        <h3>单选框的绑定</h3>
+        <p><input type="radio" id="one" value="男" v-model="sex"></p>
+        <label for="one">男</label>
+        <p><input type="radio" id="two" value="女" v-model="sex"></p>
+        <label for="two">女</label>
+        <p>你选择的性别是：{{sex}}</p>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"hello world!!",
+                isTrue:true,
+                webnames:[],
+                sex:'男'
+            }
+        })
+    </script>
+</body>
+</html>
