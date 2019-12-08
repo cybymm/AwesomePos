@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>watch</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>watch</h1>
+    <hr>
+    <div id="app">
+        <p>今日温度：{{message}}{{mark}}</p>
+        <p>穿衣建议：{{clothes}}</p>
+       <p><button @click="add(2)">升高温度</button><button @click="minus(2)">降低温度</button></p>
+    </div>
+    <script type="text/javascript">
+        var clothesarrays=["T恤短袖","夹克长裙","棉衣 羽绒服"] 
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:14,
+                mark:"°C",
+                clothes:"夹克长裙"
+            },
+            methods:{
+                add:function(num){
+                    if(this.num!='')
+                        this.message+=num;
+                    else
+                        this.message++
+                },
+                minus:function(num){
+                    if(this.num!='')
+                        this.message-=num;
+                    else
+                        this.message--
+                }
+            },
+            //写在构造器里面
+            // watch:{
+            //     message:function(newVal,oldVal){
+            //         if(this.message>=26){
+            //             this.clothes = clothesarrays[0]
+            //         }
+            //         else if(newVal<26&&newVal>0)
+            //         {
+            //             this.clothes = clothesarrays[1]
+            //         }
+            //         else{
+            //             this.clothes = clothesarrays[2]
+            //         }
+            //     }
+            // },
+            computed:{
+                newmessage:function(){
+                    // return this.message = this.message + "°"
+                }
+            }
+        })
+        //实例属性的形式来写watch监控,也就是把我们watch卸载构造器的外部
+        app.$watch('message',function(newVal,oldVal){
+            if(this.message>=26){
+                        this.clothes = clothesarrays[0]
+                    }
+                    else if(newVal<26&&newVal>0)
+                    {
+                        this.clothes = clothesarrays[1]
+                    }
+                    else{
+                        this.clothes = clothesarrays[2]
+                    }
+        })
+    </script>
+</body>
+</html>
+<!-- 
+    有些时候我们会用实例属性的形式来写watch监控。也就是把我们watch卸载构造器的外部，这样的好处就是降低我们程序的耦合度，使程序变的灵活。
+    app.$watch('xxx',function(){})
+ -->

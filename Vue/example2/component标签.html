@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component标签</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>component标签</h1>
+    <div id="app">
+       <component v-bind:is="who"></component>
+       <button @click="changeComponent">changeComponent</button>
+    </div>
+    <script type="text/javascript">
+    var componentA = {
+        template:`<div style="color:red">I'm componentA</div>`
+    }
+    var componentB = {
+        template:`<div style="color:green">I'm componentB</div>`
+    }
+    var componentC = {
+        template:`<div style="color:blue">I'm componentC</div>`
+    }
+        var app = new Vue({
+            el:"#app",
+            data:{
+                who:"componentA"
+            },
+            components:{
+                "componentA":componentA,
+                "componentB":componentB,
+                "componentC":componentC
+            },
+            methods:{
+                changeComponent:function(){
+                    if(this.who == "componentA"){
+                        this.who = "componentB"
+                    }else if(this.who == "componentB"){
+                        this.who = "componentC"
+                    }else{
+                        this.who = "componentA"
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+<!-- 
+    <component></component>这个标签是Vue这个框架定义的一种标签
+    可以让我们动态的使用script里面声明的组件
+ -->

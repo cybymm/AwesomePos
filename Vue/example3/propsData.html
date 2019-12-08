@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>propsData</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>propsData</h1>
+    <hr>
+    <myheader></myheader>
+    <script type="text/javascript">
+        var Myheader = Vue.extend({
+            template:`<div>{{message}} - {{a}}</div>`,
+            data:function(){        //data不能直接写 要写在方法中
+                return{
+                    message:"hello I'm myheader",
+                   // a:1
+                }
+                
+            },
+            props:['a']
+        });
+        //挂载
+        new Myheader({propsData:{a:'我是传值的'}}).$mount("myheader")
+
+    </script>
+</body>
+</html>

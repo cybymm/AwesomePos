@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component 父子组件关系</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>父子组件关系</h1>
+    <hr>
+    <div id="app">
+        <panda></panda>
+    </div>
+    <script type="text/javascript">
+        //声明组件 (声明一个对象，对象里的就是组件的内容)
+        var city = {
+            template:`<div style="color:red">sichuan of China</div>`
+        }
+        var pandaComponent={
+            template:`
+                <div>
+                    <p style="color:green">我是局部panda组件</p>
+                    <city></city>
+                </div>
+                `,
+                components:{//构造器里引用 对象
+                    "city":city
+                }
+        }
+        
+        //Vue
+        var app = new Vue({
+            el:"#app",
+            data:{
+            },
+            components:{ //构造器里引用对象
+                   "panda":pandaComponent //"pannda"是引用的标签<panda></panda>   pandaComponent是 var 声明的pandaComponent
+            }  
+        })
+    </script>
+</body>
+</html>
+<!-- 
+    父子组件的嵌套
+    先声明一个对象
+    再在组件中引用
+ -->

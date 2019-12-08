@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component props 属性设置</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>component props 属性设置 </h1>
+    <div id="app">
+        <ymm here="cbaoji"></ymm>
+        <flh v-bind:pig="message"></flh>
+    </div>
+    <hr>
+    
+    <script type="text/javascript">
+    
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:'pig'
+            },
+            components:{  //局部注册组件局部注册组件和全局注册组件是向对应的，局部注册的组件只能在组件注册的作用域里进行使用，其他作用域使用无效。
+                "ymm":{
+                    template:` <h1 style="color:green">I am from {{here}}</h1>`,
+                    props:['here'] //props选项后面是一个数组 
+                },
+                "flh":{
+                    template:`<h2 style="color:red">flh is a {{pig}}</h2>`,
+                    props:['pig']
+                }
+            },
+            
+            
+        })
+       
+    </script>
+</body>
+</html>
+<!-- 
+    Vue框架不支持xxx—yyy 这种形式
+    将—用驼峰的形式代替
+ -->

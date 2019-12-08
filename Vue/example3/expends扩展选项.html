@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>extends 扩展选项</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>extends 扩展选项</h1>
+    <hr>
+    <div id="app">
+        {{massage}}
+        <!-- ${num} -->
+        <p><button @click="add">+</button></p>
+    </div>
+    <hr>
+    <div id="app1">
+        ${num}
+        <p><button @click="add">delimiters</button></p>
+    </div>
+    <script type="text/javascript">
+        var extendsObj = {
+            updated:function(){
+                console.log("我是扩展的update")
+            }
+        } 
+        var app = new Vue({
+            el:"#app",
+            data:{
+                massage:1,
+            },
+            methods:{
+                add:function(){
+                    console.log("我是原生的方法")
+                    this.massage++,
+                    this.num++
+                }
+            },
+            updated:function(){
+                console.log("我是原生的update")
+            },
+            extends:extendsObj,//这里啊  重点 extends只能有一个扩展
+            
+        })
+        //delimiters
+        var app1 = new Vue({
+            el:"#app1",
+            data:{
+                num:1
+            },
+            methods:{
+                add:function(){
+                    this.num++
+                }
+            },
+             delimiters:['${','}']
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>methods Option</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>methods Option</h1>
+    
+    <div id="app">
+        {{message}}
+        <p><button @click="add">+</button></p>
+    </div>
+    <hr>
+    <div id="app2">
+        {{message}}
+        <p><button @click="add(2)">+</button></p>
+    </div>
+    <hr>
+    <div id="app3">
+        {{message}}
+        <p><button @click="add(3,$event)">+</button></p>
+    </div>
+    <hr>
+    <div id="app4">
+        {{message}}
+        <p><txt>自己要写的组件</txt></p>
+        <p><btn @click.native="add(4)"></btn></p>   <!-- native -->
+
+    </div>
+    <hr>
+    <div id="app5">
+        {{message}}
+        <p><button @click="add(5)">内部</button></p>
+    </div>
+    <p>外部调用click没用 应该用onclick</p>
+    <button onclick="app5.add(6)">外部</button><!-- 外部调用 -->
+    <script type="text/javascript">
+        //《零》
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:1
+            },
+            methods:{
+               add:function(num){
+                        this.message++
+               }
+            }
+        })
+        //《一》
+        var app = new Vue({
+            el:"#app2",
+            data:{
+                message:1
+            },
+            methods:{
+                add:function(num){
+                    if(this.num!='')
+                        this.message+=num;
+                    else
+                        this.message++
+                }
+            }
+
+        })
+        //《二》
+        var app = new Vue({
+            el:"#app3",
+            data:{
+                message:1
+            },
+            methods:{
+                add:function(num,event){
+                    if(this.num!='')
+                        this.message+=num;   
+                    else   
+                        this.message++   
+                    console.log(event)
+                        
+                }
+            }
+        })
+        //《三》
+        //自己写的的组件
+        var txts = {
+            template:'<div>我是一个组件,我会覆盖掉原来的文本</div>'
+        }
+        var Button = {
+            template:'<button>我是组件ADD</button>'
+        }
+        var app = new Vue({
+            el:'#app4',
+            data:{
+                message:1
+            },
+            components:{
+                "txt":txts,
+                "btn":Button
+            },
+            methods:{
+                add:function(num){
+                    if(this.num!='')
+                        this.message+=num;
+                    else
+                        this.message++
+                }
+            }
+        })
+        //《四》
+        var app5 = new Vue({
+            el:"#app5",
+            data:{
+                message:1
+            },
+            methods:{
+                add:function(num){
+                    if(this.num!='')
+                        this.message+=num
+                    else    
+                        this.message++
+                }
+            }
+        })
+</script>
+</body>
+</html>
+<!-- \
+《一》
+    1.在methods的方法中进行声明，比如我们给add方法加上一个num参数，就要写出 add:function(num){}
+    2.调用方法直接传递，比如我们要传递2 这个参数，我们在button上就直接可以写<button @click="add(2)">+</button>
+《二》
+    传递$event参数都是关于点鸡鼠标一些事件和属性
+    <button @click="add(2,$event)">add</button> 可以打印看一下event是包含了大部分鼠标事件的属性
+《三》
+    native给组件绑定构造器里的原生事件
+    在实际开发过程中经常需要把某个按钮封装成组件，然后反复利用，可与i用此方法
+《四》
+    作用域外部调用构造器里的方法
+
+    这种不经常使用，如果你出现了这种情况，说明你的代码组织不够好。
+-->  

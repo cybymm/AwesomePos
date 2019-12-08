@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <!-- <script type="text/javascript" src="../assets/js/all.js"></script> -->
+</head>
+<body>
+    <h1>实例</h1>
+    <div id="app">
+       
+    </div>
+    <p><button onclick="destroy()">卸载</button></p><!--（按钮要放在构造器的外边 用onclick进行点击按钮卸载事件）-->
+    <p><button onclick="reload()">刷新</button></p>
+    <p><button onclick="tick()">更改数据</button></p>
+    <qw></qw>
+    <!--
+            注意组件注册的位置
+    -->
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+               
+            },
+            
+
+        })
+        //扩展实例构造器
+        var Extend = Vue.extend({
+            template:"<p>我叫{{username}}，<a :href='userlink'>查看我的详细信息</a></p>",
+            data:function(){
+                return{
+                    username:"猪八戒",
+                    userlink:"https://baike.baidu.com/item/%E7%8C%AA%E5%85%AB%E6%88%92/769?fr=aladdin"
+                }
+            }
+        })
+        new Extend().$mount('qw');
+        //1.实例
+        var ymm = Vue.extend({
+            template:"<p>{{message}}</p>",
+            data:function(){
+                return{
+                    message:"I'm ymm"
+                }
+            },
+            mounted:function(){
+                console.log("mounted被创建")
+            },
+            destroyed:function(){
+                console.log("我已经被卸载了")
+            },
+            updated:function(){
+                console.log("我被更新了")
+            }
+        })
+        //挂载到id名为app的div上
+        var vm = new ymm().$mount('#app');
+        function destroy(){
+            vm.$destroy()
+        }
+        function reload(){
+            vm.$forceUpdate()
+        }
+        function tick(){
+            vm.message="update message info ";
+            vm.$nextTick(function(){
+            console.log('message更新完后我被调用了');
+            })
+        }
+
+    </script>
+</body>
+</html>
+<!-- 
+    1.$mount方法是用来挂载我们扩展的
+    2.$destory方法是用来卸载的   （按钮要放在构造器的外边 用onclick进行点击按钮卸载事件）
+    3.$forceUpdate()  更新方法
+    4.$nextTick() 数据修改方法（当Vue构造器里的data值被修改完成后会调用这个方法，也相当于一个钩子函数吧，和构造器里的updated生命周期很像）
+ -->

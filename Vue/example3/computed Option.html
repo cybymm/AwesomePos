@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed Option</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>computed Option</h1>
+    <div id="app">
+        <h3>改造原数据</h3>
+        <p :style='style1'>我的原数据没有用computed改造</p>
+            <span :style='style2'>{{price1}}</span>
+        <br>
+        <p :style='style1'>我的原数据用computed改造过了</p>
+            <span :style='style2'>{{newPrice}}</span>
+        <hr>
+        <h3>反转数组</h3>
+        <ul>
+            <li v-for='item in reversNews'>{{item.title}}-{{item.date}}</li>
+        </ul>
+    </div>
+    <div id="news"></div>
+    <script type="text/javascript">
+    //声明newsList
+    var newsList = [
+        { title:'新闻标题1',date:'2019-10-04'},
+        { title:'新闻标题2',date:'2019-10-05'},
+        { title:'新闻标题3',date:'2019-10-06'},
+        { title:'新闻标题4',date:'2019-10-07'},
+    ]
+        var app = new Vue({
+            el:"#app",
+            data:{
+                price:100,
+                price1:100,
+                newsList:newsList,
+                style1:{
+                    color:'black',
+                },
+                style2:{
+                    color:'green',
+                    fontSize:'300%'
+                }
+            },
+            computed:{
+                newPrice:function(){
+                    return this.price='￥'+ this.price + '元';
+                },
+                reversNews:function(){
+                    return this.newsList.reverse();//reverse是js原生反转数组的方法
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+<!-- 
+    computed
+        作用：主要是对原数据进行改造输出。改造输出：包括格式的编辑，大小的转换，顺序重拍，添加符号...
+
+
+
+ -->

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>holle world</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>hello</h1>
+    <div id="app">
+        {{massage}}
+    </div>
+    <template id="dd2">
+        <h2>我是template标签模板</h2>    <!--第二种模板-->
+    </template>
+     <!--第三种模板-->
+    <script type="xtemplate" id="dd4">    
+            <h2>我是script标签模板</h2>     
+    </script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                massage:"hello world!!"
+            },
+            template:"#dd4"
+            // template:`     //第一种模板 标识不是单引号和双引号，而是，就是Tab上面的键。
+            //     <h1 style="color:red">我是选项模板</h1>
+            // `
+        })
+    </script>
+</body>
+</html>

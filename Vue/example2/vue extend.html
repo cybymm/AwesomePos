@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VUE extend 扩展实例构造器</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>VUE extend 扩展实例构造器</h1>
+    <hr>
+    <author></author>
+    <script type="text/javascript">
+        var authorExtend = Vue.extend({
+            template:"<p><a :href='authorUrl'>{{authorName}}</a></p>",//href用单引号
+          //  template:"<p><a :href='authorUrl'>{{authorName}}</a></p>",
+            data:function(){
+                return{
+                    authorName:"ymm",
+                    authorUrl:'http://www.jspang.com'
+                //     authorName:'JSPang',
+                //    authorUrl:'http://www.jspang.com'
+                }
+            }
+        });
+        new authorExtend().$mount("author");//挂载 扩展实例构造器是需要挂载的
+        //new authorExtend().$mount('author');
+    </script>
+</body>
+</html>

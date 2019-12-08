@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例事件</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <h1>实例事件</h1>
+    <div id="app">
+        {{message}}
+        <p><button @click="add">+</button></p>
+        <p><button onclick="reduce()">--</button></p>
+        <p><button onclick="reduceonce()">-</button></p>
+        <p><button onclick="off()">关闭--</button></p>
+    </div>
+   
+    <script type="text/javascript">
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:1
+            },
+            methods:{
+                add:function(){
+                    this.message++
+                }
+            }
+            
+
+        })
+        //1.
+        app.$on('reduce',function(){
+            console.log("我是构造器外部的减函数")
+            this.message--
+        })
+        function reduce(){
+            app.$emit('reduce')//如果按钮在作用域外部，可以利用$emit来执行。
+        }
+        //2.
+        app.$once('reduceonce',function(){
+            console.log("我也在构造器外部，可是我只执行一次");
+            this.message--
+        })
+        function reduceonce(){
+            app.$emit('reduceonce')
+        }
+        //3
+        function off(){
+            console.log('我是off, 我关闭了--事件')
+            app.$off('reduce')
+        }
+
+    </script>
+</body>
+</html>
+<!-- 
+    实例事件指的是在构造器的外部写一个调用内部的方法，可以调用内部的数据
+    1.$on 在构造器外部添加事件(如果按钮在作用域外部，可以利用$emit来执行)
+    2.$once 执行一次的事件
+    3.off 关闭事件
+ -->

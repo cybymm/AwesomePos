@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component全局组件</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>component全局组件</h1>
+    <div id="app">
+        <jspang></jspang>
+        <ymm></ymm>
+    </div>
+    <hr>
+    <div id="ppa">
+        <jspang></jspang>
+        
+    </div>
+    <script type="text/javascript">
+    Vue.component('jspang',{
+        template:`
+            <h1 style="color:red">我是全局的jspang组件</h1>
+        `
+    })//全局 全局化就是在构造器的外部用Vue.component来注册 且它可以放到多个构造器的作用域里
+        var app = new Vue({
+            el:"#app",
+            components:{  //局部注册组件局部注册组件和全局注册组件是向对应的，局部注册的组件只能在组件注册的作用域里进行使用，其他作用域使用无效。
+                "ymm":{
+                    template:` <h1 style="color:green">我是局部的ymm组件</h1>`
+                }
+            },
+            
+            data:{
+               
+            }
+        })
+        var ppa = new Vue({
+            el:"#ppa"
+        })
+    </script>
+</body>
+</html>
+<!-- 
+    组件注册的是一个标签
+    而指令注册的是已有标签里的一个属性
+ -->
